@@ -1,0 +1,19 @@
+h1 { background-color: darkslategrey;
+    color: floralwhite;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    text-align: center;
+    padding: 20%, 20%;
+    margin-bottom: unset;
+}
+#city-list {
+    border: black;
+    padding: 0%;
+    margin: 2%
+}
+.city {
+    color: black;
+    list-style-type: none;
+    text-align: left;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 2%;
+}

@@ -1,80 +1,82 @@
 var cityList = [];
 //use localstorage to store and get data on click  
-function displayWeather(){
-    var city = $(this).attr('data-name');
+if (localStorage.getItem('city-info')) {
+    cityList = JSON.parse(localStorage.getItem('city-info'))
+}
 
-    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=07c55abb142d07d64c38ec8a22379edc&units=imperial"
+function callAPI(city) {
+
+    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=07c55abb142d07d64c38ec8a22379edc&units=imperial"
     $.ajax({
-        url : queryURL,
+        url: queryURL,
         method: 'GET'
-    }).then(function(response) {
-        console.log(response);
-        console.log(queryURL);
+    }).then(function (response) {
         var currentWeatherDiv = $('#currentWeather');
         currentWeatherDiv.empty();
-        // $('#currentWeather').text(JSON.stringify(response));
         var cityName = response.name
-        console.log(cityName)
-        var t1 = $('<h4>').text(cityName);
-        currentWeatherDiv.append(t1);
-        var date = $('<h4>').text(moment().format("MM/DD/YYYY"));
-        console.log(date);
-        currentWeatherDiv.append(date);
-        var icon = "http://openweathermap.org/img/wn/"+response.weather[0].icon+".png"
-        console.log(icon);
-        currentWeatherDiv.append(icon);
-        var temp = response.main.temp;
-        console.log(temp);
-        var t2 = $('<p>').text("Temperature: " + temp+"°F")
-        currentWeatherDiv.append(t2);
-        var humidity =response.main.humidity
-        console.log(humidity)
-        var t3 = $('<p>').text('Humidity: '+ humidity+'%');
-        currentWeatherDiv.append(t3);
+        var t1 = $('<h5>').text(cityName);
+        var date = $('<h5>').text(moment().format("MM/DD/YYYY"));
+        var icon = "http://openweathermap.org/img/wn/" + response.weather[0].icon + ".png"
+        var showIcon = $('<img>').attr('src', icon);
+        var temp = response.main.temp
+        var t2 = $('<p>').text("Temperature: " + temp + "°F");
+        var humidity = response.main.humidity
+        var t3 = $('<p>').text('Humidity: ' + humidity + '%');
         var windspeed = response.wind.speed
-        console.log(windspeed)
-        var t4 = $('<p>').text('Windspeed: '+ windspeed+'MPH');
-        
+        var t4 = $('<p>').text('Windspeed: ' + windspeed + 'MPH');
+        currentWeatherDiv.append(t1, date, showIcon, t2, t3, t4);
     })
-    var queryURL2 ="http://api.openweathermap.org/data/2.5/forecast?q="+city+"&appid=07c55abb142d07d64c38ec8a22379edc&units=imperial"
+    var queryURL2 = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=07c55abb142d07d64c38ec8a22379edc&units=imperial"
     $.ajax({
-        url : queryURL2,
+        url: queryURL2,
         method: 'GET'
-    }).then(function(response2) {   
-        console.log(response2);
-        console.log(queryURL2);
+    }).then(function (response2) {
+
         var forecastDiv = $('#5dayForecast');
         forecastDiv.empty();
-        for (i = 0; i < response2.list.length; i++){
-            // if ()
-            var Objdate = toLocaleDateString(response2.list[i].dt_txt);
-            console.log(Objdate);  
-            
+        for (var i = 3; i < response2.list.length; i = i + 8) {
+            var weathObj = response2.list[i]
+            var days = $('<h4>').text(moment(weathObj.dt_txt).format('MM/DD/YYYY'))
+            var icon = "http://openweathermap.org/img/wn/" + weathObj.weather[0].icon + ".png"
+            var showIcon = $('<img>').attr('src', icon);
+            var temp = weathObj.main.temp;
+            var t5 = $('<p>').text("Temperature: " + temp + "°F")
+            var humidity = weathObj.main.humidity
+            var t6 = $('<p>').text("HUmidity: " + humidity + '%')
+            var smallDiv = $('<div>').addClass('flex-child');
+            smallDiv.append(days, showIcon, t5, t6)
+            forecastDiv.append(smallDiv);
+
         }
-    }); 
-} 
+    });
+}
+
+function displayWeather() {
+    var city = $(this).attr('data-name');
+    callAPI(city);
+}
+
 function generateList() {
     $('#city-list').empty();
-    for (var i = 0; i < cityList.length; i++){
-        var c  = $('<li>');
+
+    for (var i = 0; i < cityList.length; i++) {
+        var c = $('<li>');
         c.addClass('city');
         c.attr('data-name', cityList[i])
         c.text(cityList[i]);
         $('#city-list').append(c);
     }
 }
-$('#searchBtn').on('click', function(event){
+$('#searchBtn').on('click', function (event) {
     event.preventDefault();
     var city = $('#cityInput').val();
-    console.log(city);
     cityList.push(city);
-
-generateList();
+    localStorage.setItem('city-info', JSON.stringify(cityList));
+    generateList();
+    callAPI(city);
 });
+
 $(document).on('click', '.city', displayWeather);
 generateList();
-    
-    
-// addCity();
-// console.log(response);
-// console.log(queryURL);
+
+

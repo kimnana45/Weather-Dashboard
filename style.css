@@ -1,9 +1,13 @@
-h1 { background-color: darkslategrey;
+h1 { background-color: #5f9ea0;
     color: floralwhite;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     text-align: center;
     padding: 20%, 20%;
     margin-bottom: unset;
+}
+h4 {
+    margin-top: 2%;
+    text-align: center;
 }
 #city-list {
     border: black;
@@ -16,4 +20,23 @@ h1 { background-color: darkslategrey;
     text-align: left;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     padding: 2%;
+}
+#currentWeather {
+    border: 2px solid #5f9ea0;
+    border-radius: 25px;
+    background-color: #fafad2;
+    text-align: center;
+    margin: 2% 0% 1%;
+}
+.flex-container {
+    display: flex;
+}
+.flex-child {
+    flex: 1;
+    border: 2px solid rgb(81, 81, 245);
+    border-radius: 25px;
+    background-color: #5f9ea0;
+    margin: 1%;
+    padding: 1%;
+    text-align: center;
 }

@@ -6,7 +6,7 @@ if (localStorage.getItem('city-info')) {
 
 function callAPI(city) {
 
-    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=07c55abb142d07d64c38ec8a22379edc&units=imperial"
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=07c55abb142d07d64c38ec8a22379edc&units=imperial"
     $.ajax({
         url: queryURL,
         method: 'GET'
@@ -26,7 +26,7 @@ function callAPI(city) {
         var t4 = $('<p>').text('Windspeed: ' + windspeed + 'MPH');
         currentWeatherDiv.append(t1, date, showIcon, t2, t3, t4);
     })
-    var queryURL2 = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=07c55abb142d07d64c38ec8a22379edc&units=imperial"
+    var queryURL2 = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=07c55abb142d07d64c38ec8a22379edc&units=imperial"
     $.ajax({
         url: queryURL2,
         method: 'GET'

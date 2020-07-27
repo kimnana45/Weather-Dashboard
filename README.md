@@ -1,8 +1,7 @@
 # Weather-Dashboard
 
 ## Description 
-Designing a weather app using OpenWeather API
-Use the [OpenWeather API](https://openweathermap.org/api) to retrieve weather data for cities. The documentation includes a section called "How to start" that will provide basic setup and usage instructions. Use `localStorage` to store any persistent data.
+A weather app using OpenWeather API to retrieve weather data for any cities in the world. User is able to see weather forecast for 6 days including temperature, wind speed, and humidity.  The documentation includes a section called "How to start" that will provide basic setup and usage instructions. Use `localStorage` to store any persistent data.
 
 ## User Story
 

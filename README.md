@@ -13,3 +13,7 @@ SO THAT I can plan a trip accordingly
 
 <img src="WeatherApp.png">
 
+## Depoloyment 
+
+https://kimnana45.github.io/Weather-Dashboard/
+

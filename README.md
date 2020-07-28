@@ -11,4 +11,5 @@ SO THAT I can plan a trip accordingly
 
 ## Preview 
 
+<img src="WeatherApp.png">
 
